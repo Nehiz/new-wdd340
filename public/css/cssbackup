@@ -1,0 +1,387 @@
+:root {
+  --text-color: #333;
+  --primary-color: #004080;
+  --secondary-color: #003366;
+  --background-color: #f4f4f4;
+  --highlight-color: rgba(255, 255, 255, 0.39);
+  --border-color: #ccc;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-image: url('/images/site/checkerboard.jpg');
+  background-size: 100px 100px;
+  background-repeat: repeat;
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--background-color);
+}
+
+header, nav, main, footer {
+  padding: 1rem;
+}
+
+h1, h2 {
+  color: #333;
+}
+
+#page-container {
+  background-color: #fff;
+  border: 10px solid #000;
+  padding: 20px;
+  width: 100%;
+  margin: 20px;
+  box-shadow: 0px 4px 6px var(--shadow-color);
+}
+
+#top-header a {
+  color: #fff;
+  text-decoration: none;
+}
+
+#top-header a:hover {
+  text-decoration: underline;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  background-color: #000;
+  padding: 10px;
+}
+
+nav ul li {
+  margin: 0;
+  display: inline;
+  margin-right: 1rem;
+}
+
+nav ul li a {
+  color: #007BFF;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: var(--background-color);
+  border-bottom: 2px solid var(--border-color);
+}
+
+#top-header .siteName {
+  font-size: clamp(1rem, 5vw, 2rem);
+  font-weight: bold;
+}
+
+#top-header .siteName a {
+  color: #000;
+  text-decoration: none;
+}
+
+#top-header #tools a {
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  color: var(--primary-color);
+  text-decoration: none;
+  position: relative;
+  top: -5px;
+}
+
+#top-header #tools a:hover {
+  text-decoration: underline;
+}
+
+#welcome-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #fff;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  padding: 2rem;
+  background-color: #f9f9f9;
+}
+
+#welcome-section h1,
+#reviews-section h2,
+#upgrades-section h2 {
+  font-size: clamp(1rem, 5vw, 2rem);
+  font-weight: bold;
+  text-align: left;
+  width: 100%;
+}
+
+#highlighted-car-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 400px;
+}
+
+#highlighted-car-container {
+  display: flex;
+  position: relative;
+  background-image: url('/images/vehicles/delorean.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  width: 80%;
+  height: 380px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#car-highlight {
+  background-color: var(--highlight-color);
+  padding: clamp(10px, 3vw, 20px);
+  border-radius: 5px;
+  max-width: clamp(200px, 30vw, 300px);
+  position: absolute;
+  top: 40%;
+  left: 5%;
+  transform: translate(-20%, -50%);
+  z-index: 1;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  background-color: #fff;
+}
+
+#car-highlight h2 {
+  margin-top: 0;
+}
+
+#car-highlight button {
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+#car-highlight button:hover {
+  background-color: #0056b3;
+}
+
+#welcome-section h2 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+#welcome-section p {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+#welcome-section #own-today {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 10px 45px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 1em;
+  font-size: 1rem;
+}
+
+#welcome-section #own-today:hover {
+  background-color: var(--secondary-color);
+}
+
+.review-upgrade-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+  padding: 2rem;
+  background-color: #f1f1f1;
+}
+
+#reviews-section {
+  width: 100%;
+  padding: 0 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+}
+
+#reviews-list {
+  list-style-type: disc;
+  padding: 1rem 1rem;
+  list-style-type: none;
+  padding: 0;
+}
+
+#reviews-list li {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+#upgrades-section {
+  width: 100%;
+  padding: 0 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+}
+
+#upgrades {
+  height: auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.upgrade-item {
+  grid-column: span 1;
+  text-align: center;
+  border-radius: 5px;
+  width: 45%;
+  text-align: center;
+}
+
+.image-wrapper {
+  height: 80%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #074956;
+  background-color: rgb(53, 185, 185);
+}
+
+.upgrade-item p {
+  font-size: .8rem;
+  color: #333;
+}
+
+.upgrade-item img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+footer {
+  text-align: left;
+  color: #000;
+  padding: 10px 0;
+  text-align: center;
+  padding: 1rem;
+  background-color: #333;
+  color: #fff;
+}
+
+#inv-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+  list-style-type: none;
+}
+
+#inv-display li {
+  flex: 1 1 calc(33.333% - 1rem);
+  border: 1px solid #ddd;
+  padding: 1rem;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#inv-display li img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.namePrice {
+  text-align: center;
+}
+
+.namePrice h2 {
+  margin: 0.5rem 0;
+}
+
+.namePrice span {
+  color: #007BFF;
+  font-weight: bold;
+}
+
+@media screen and (min-width: 769px) {
+  .review-upgrade-wrapper {
+    flex-direction: row-reverse;
+    height: 350px;
+  }
+
+  #reviews-section {
+    width: 50%;
+  }
+
+  #upgrades-section {
+    width: 50%;
+  }
+
+  #upgrades {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .review-upgrade-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #reviews-section, #upgrades-section {
+    width: 100%;
+  }
+
+  .upgrade-item {
+    width: 100%;
+  }
+
+  #inv-display li {
+    flex: 1 1 calc(100% - 1rem);
+  }
+}
+
+
+
