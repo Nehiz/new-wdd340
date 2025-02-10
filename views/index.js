@@ -1,0 +1,63 @@
+<main>
+    <!-- Welcome Section-->
+    <section id="welcome-section">
+        <h1>Welcome to CSE Motors!</h1>
+        <div id="highlighted-car-wrapper">
+            <div id="highlighted-car-container">
+                <div id="car-highlight">
+                    <h2>DMC DeLorean</h2>
+                    <p>3 Cup holders<br>Superman doors<br>Fuzzy dice!</p>
+                    <button id="own-today">Own Today</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="review-upgrade-wrapper">
+
+        <!-- Review Section -->
+        <section id="reviews-section">
+            <h2>DMC DeLorean Reviews</h2>
+            <ul id="reviews-list">
+                <li>“So fast it’s almost like traveling in time.” (4/5)</li>
+                <li>“Coolest ride on the road.” (4/5)</li>
+                <li>“80’s livin and I love it!” (5/5)</li>
+                <li>“The most futuristic ride of our day.” (4/5)</li>
+                <li>“Cruisin’ like a boss.” (4/5)</li>
+            </ul>
+        </section>
+
+        <!-- Upgrade Section -->
+        <section id="upgrades-section">
+            <h2>DeLorean Upgrades</h2>
+            <div id="upgrades">
+                <div class="upgrade-item">
+                    <div class="image-wrapper">
+                        <img src="/images/upgrades/flux-cap.png" alt="Flux Capacitor">
+                    </div>
+                    <p><a href=""> Flux Capacitor </a></p>
+                </div>
+                <div class="upgrade-item">
+                    <div class="image-wrapper">
+                      <img src="/images/upgrades/flame.jpg" alt="Flame Decals">
+                    </div>
+                    <p><a href=""> Flame Decals </a></p>
+                </div>
+                <div class="upgrade-item">
+                    <div class="image-wrapper">
+                        <img src="/images/upgrades/bumper_sticker.jpg" alt="Bumper Stickers">
+                    </div>
+                    <p> <a href=""> Bumper Stickers</a> </p>
+                </div>
+                <div class="upgrade-item">
+                    <div class="image-wrapper">
+                        <img src="/images/upgrades/hub-cap.jpg" alt="Hub Caps">
+                    </div>
+                    <p> <a href=""> Hub Caps </a></p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+</main>

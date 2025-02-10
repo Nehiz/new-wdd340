@@ -1,6 +1,274 @@
-/******* Change Box Model ***************/
-*,
-*:before,
-*:after {
+:root {
+  --text-color: #333;
+  --primary-color: #004080;
+  --secondary-color: #003366;
+  --background-color: #f4f4f4;
+  --highlight-color: rgba(255, 255, 255, 0.39);
+  --border-color: #ccc;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
+
+body {
+  width: 100%;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-image: url('/images/site/checkerboard.jpg');
+  background-size: 100px 100px;
+  background-repeat: repeat;
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--background-color);
+}
+
+#page-container {
+  background-color: #fff;
+  border: 10px solid #000;
+  padding: 20px;
+  width: 100%;
+  margin: 20px;
+  box-shadow: 0px 4px 6px var(--shadow-color);
+}
+
+#top-header a {
+  color: #fff;
+  text-decoration: none;
+}
+
+#top-header a:hover {
+  text-decoration: underline;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  background-color: #000;
+  padding: 10px;
+}
+
+nav ul li {
+  margin: 0;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: var(--background-color);
+  border-bottom: 2px solid var(--border-color);
+}
+
+#top-header .siteName {
+  font-size: clamp(1rem, 5vw, 2rem);
+  font-weight: bold;
+}
+
+#top-header .siteName a {
+  color: #000;
+  text-decoration: none;
+}
+
+#top-header #tools a {
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  color: var(--primary-color);
+  text-decoration: none;
+  position: relative;
+  top: -5px;
+}
+
+#top-header #tools a:hover {
+  text-decoration: underline;
+}
+
+#welcome-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #fff;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  position: relative;
+  width: 100%;
+}
+
+#welcome-section h1,
+#reviews-section h2,
+#upgrades-section h2 {
+  font-size: clamp(1rem, 5vw, 2rem);
+  font-weight: bold;
+  text-align: left;
+  width: 100%;
+}
+
+#highlighted-car-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 400px;
+}
+
+#highlighted-car-container {
+  display: flex;
+  position: relative;
+  background-image: url('/images/vehicles/delorean.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  width: 80%;
+  height: 380px;
+}
+
+#car-highlight {
+  background-color: var(--highlight-color);
+  padding: clamp(10px, 3vw, 20px);
+  border-radius: 5px;
+  max-width: clamp(200px, 30vw, 300px);
+  position: absolute;
+  top: 40%;
+  left: 5%;
+  transform: translate(-20%, -50%);
+  z-index: 1;
+}
+
+#welcome-section h2 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+#welcome-section p {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+#welcome-section #own-today {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 10px 45px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 1em;
+  font-size: 1rem;
+}
+
+#welcome-section #own-today:hover {
+  background-color: var(--secondary-color);
+}
+
+.review-upgrade-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  padding: 0;
+}
+
+#reviews-section {
+  width: 100%;
+  padding: 0 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+#reviews-list {
+  list-style-type: disc;
+  padding: 1rem 1rem;
+}
+
+#reviews-list li {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+#upgrades-section {
+  width: 100%;
+  padding: 0 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+#upgrades {
+  height: auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.upgrade-item {
+  grid-column: span 1;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.image-wrapper {
+  height: 80%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #074956;
+  background-color: rgb(53, 185, 185);
+}
+
+.upgrade-item p {
+  font-size: .8rem;
+  color: #333;
+}
+
+footer {
+  text-align: left;
+  color: #000;
+  padding: 10px 0;
+}
+
+@media screen and (min-width: 769px) {
+  .review-upgrade-wrapper {
+    flex-direction: row-reverse;
+    height: 350px;
+  }
+
+  #reviews-section {
+    width: 50%;
+  }
+
+  #upgrades-section {
+    width: 50%;
+  }
+
+  #upgrades {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+}
+
+
+
