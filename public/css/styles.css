@@ -53,7 +53,7 @@ nav ul {
   display: flex;
   justify-content: space-around;
   list-style: none;
-  background-color: #000;
+  background-color: var(--primary-color);
   padding: 10px;
 }
 
@@ -86,7 +86,7 @@ nav ul li a:hover {
 }
 
 #top-header .siteName a {
-  color: #000;
+  color: var(--primary-color);
   text-decoration: none;
 }
 
@@ -111,6 +111,8 @@ nav ul li a:hover {
   margin-bottom: 20px;
   position: relative;
   width: 100%;
+  text-align: justify;
+  padding: 2rem;
 }
 
 #welcome-section h1,
@@ -151,16 +153,13 @@ nav ul li a:hover {
   left: 5%;
   transform: translate(-20%, -50%);
   z-index: 1;
+  border: 1px solid #ddd;
+  padding: 1rem;
 }
 
-#welcome-section h2 {
-  font-size: 1.5rem;
+#welcome-section h2, p {
+  margin-top: 0;
   color: var(--primary-color);
-}
-
-#welcome-section p {
-  font-size: 1.2rem;
-  margin: 10px 0;
 }
 
 #welcome-section #own-today {
@@ -199,6 +198,8 @@ nav ul li a:hover {
 #reviews-list {
   list-style-type: disc;
   padding: 1rem 1rem;
+  list-style-type: none;
+  padding: 0;
 }
 
 #reviews-list li {
@@ -235,19 +236,56 @@ nav ul li a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #074956;
-  background-color: rgb(53, 185, 185);
+  border: 1px solid var(--primary-color);
+  background-color: var(--primary-color);
 }
 
 .upgrade-item p {
   font-size: .8rem;
-  color: #333;
+  color: var(--text-color);
 }
 
 footer {
   text-align: left;
-  color: #000;
+  color: var(--text-color);
   padding: 10px 0;
+}
+
+#inv-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+  list-style-type: none;
+}
+
+#inv-display li {
+  flex: 1 1 calc(33.333% - 1rem);
+  border: 1px solid #ddd;
+  padding: 1rem;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#inv-display li img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.namePrice {
+  text-align: center;
+}
+
+.namePrice h2 {
+  margin: 0.5rem 0;
+}
+
+.namePrice span {
+  color: var(--primary-color);
+  font-weight: bold;
 }
 
 @media screen and (min-width: 769px) {
@@ -270,5 +308,23 @@ footer {
   }
 }
 
+@media (max-width: 768px) {
+  .review-upgrade-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #reviews-section, #upgrades-section {
+    width: 100%;
+  }
+
+  .upgrade-item {
+    width: 100%;
+  }
+
+  #inv-display li {
+    flex: 1 1 calc(100% - 1rem);
+  }
+}
 
 
