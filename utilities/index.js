@@ -57,6 +57,26 @@ Util.buildClassificationGrid = async function(data) {
   return grid
 }
 
+/* **************************************
+ * Build the inventory detail view HTML
+ * ************************************ */
+Util.buildInventoryDetail = async function(data) {
+  let detail = `
+    <div class="inventory-detail">
+      <img src="${data.inv_image}" alt="Image of ${data.inv_make} ${data.inv_model} on CSE Motors" />
+      <div class="inventory-info">
+        <h2>${data.inv_make} ${data.inv_model}</h2>
+        <p>Year: ${data.inv_year}</p>
+        <p>Price: $${new Intl.NumberFormat('en-US').format(data.inv_price)}</p>
+        <p>Mileage: ${new Intl.NumberFormat('en-US').format(data.inv_miles)} miles</p>
+        <p>Color: ${data.inv_color}</p>
+        <p>Description: ${data.inv_description}</p>
+      </div>
+    </div>
+  `
+  return detail
+}
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
