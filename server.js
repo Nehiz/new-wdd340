@@ -16,6 +16,7 @@ const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
 const errorRoute = require("./routes/errorRoute") // Add this line
 const utilities = require("./utilities") // Ensure this line is present
+const accountRoute = require("./routes/accountRoute") // Add this line
 
 /* ***********************
  * Middleware
@@ -53,6 +54,9 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 
 // Inventory routes
 app.use("/inv", utilities.handleErrors(inventoryRoute))
+
+// Account routes
+app.use("/account", utilities.handleErrors(accountRoute)) // Add this line
 
 // Error route
 app.use("/error", utilities.handleErrors(errorRoute))
