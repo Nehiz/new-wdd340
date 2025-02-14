@@ -10,6 +10,7 @@ const expressLayouts = require('express-ejs-layouts');
 const env = require("dotenv").config()
 const session = require("express-session")
 const pool = require('./database/')
+const bodyParser = require("body-parser") // Add this line
 const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
@@ -38,6 +39,10 @@ app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res)
   next()
 })
+
+// Body Parser Middleware
+app.use(bodyParser.json()) // Add this line
+app.use(bodyParser.urlencoded({ extended: true })) // Add this line
 
 /* View Engine and Templates */
 app.set('view engine', 'ejs');
