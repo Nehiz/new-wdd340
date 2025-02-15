@@ -20,6 +20,10 @@ async function buildRegister(req, res, next) {
   res.render("account/register", {
     title: "Register",
     nav,
+    errors: null, // Ensure this line is present
+    account_firstname: "", // Initialize the form fields
+    account_lastname: "",
+    account_email: ""
   })
 }
 
@@ -51,6 +55,9 @@ async function registerAccount(req, res) {
     res.status(501).render("account/register", {
       title: "Registration",
       nav,
+      account_firstname,
+      account_lastname,
+      account_email
     })
   }
 }

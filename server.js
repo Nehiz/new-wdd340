@@ -10,14 +10,14 @@ const expressLayouts = require('express-ejs-layouts');
 const env = require("dotenv").config()
 const session = require("express-session")
 const pool = require('./database/')
-const bodyParser = require("body-parser") // Add this line
+const bodyParser = require("body-parser") // Ensure this line is present
 const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
-const errorRoute = require("./routes/errorRoute") // Add this line
-const utilities = require("./utilities") // Ensure this line is present
-const accountRoute = require("./routes/accountRoute") // Add this line
+const errorRoute = require("./routes/errorRoute")
+const accountRoute = require("./routes/accountRoute")
+const utilities = require("./utilities")
 
 /* ***********************
  * Middleware
@@ -41,8 +41,8 @@ app.use(function(req, res, next){
 })
 
 // Body Parser Middleware
-app.use(bodyParser.json()) // Add this line
-app.use(bodyParser.urlencoded({ extended: true })) // Add this line
+app.use(bodyParser.json()) // Ensure this line is present
+app.use(bodyParser.urlencoded({ extended: true })) // Ensure this line is present
 
 /* View Engine and Templates */
 app.set('view engine', 'ejs');
@@ -61,7 +61,7 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 app.use("/inv", utilities.handleErrors(inventoryRoute))
 
 // Account routes
-app.use("/account", utilities.handleErrors(accountRoute)) // Add this line
+app.use("/account", utilities.handleErrors(accountRoute))
 
 // Error route
 app.use("/error", utilities.handleErrors(errorRoute))
