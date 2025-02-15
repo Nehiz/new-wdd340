@@ -9,6 +9,8 @@ async function buildLogin(req, res, next) {
   res.render("account/login", {
     title: "Login",
     nav,
+    errors: null, // Initialize the errors variable
+    account_email: "" // Initialize the form field
   })
 }
 
