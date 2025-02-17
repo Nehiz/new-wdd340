@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head') %>
+  <title>Add Classification</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div id="page-container">
+    <main>
+      <h1>Add New Classification</h1>
+      <!-- Display flash messages -->
+      <% if (messages) { %>
+        <% Object.keys(messages).forEach(function(key) { %>
+          <ul class="messages">
+            <% messages[key].forEach(function(message) { %>
+              <li class="<%= key %>"><%= message %></li>
+            <% }); %>
+          </ul>
+        <% }); %>
+      <% } %>
+      <!-- Display server-side validation errors if any -->
+      <% if (errors && errors.length > 0) { %>
+        <ul class="error-list">
+          <% errors.forEach(function(err){ %>
+            <li><%= err.msg %></li>
+          <% }); %>
+        </ul>
+      <% } %>
+      <form action="/inv/add-classification" method="post">
+        <label for="classification_name">Classification Name:</label>
+        <input type="text" id="classification_name" name="classification_name" required
+               pattern="^[a-zA-Z0-9]+$"
+               title="Cannot contain spaces or special characters."
+               value="<%= typeof classification_name !== 'undefined' ? classification_name : '' %>">
+        <button type="submit">Add Classification</button>
+      </form>
+    </main>
+  </div>
+</body>
+</html>

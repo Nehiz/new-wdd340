@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <%- include('../partials/head') %>
-  <body>
+  <body class="<%= typeof pageClass !== 'undefined' ? pageClass : '' %>">
     <div id="page-container">
       <header>
         <%- include('../partials/header') %>

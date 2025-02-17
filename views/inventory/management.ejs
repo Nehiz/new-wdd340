@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ...existing head markup... -->
+  <%- include('../partials/head') %>
+  <title>Inventory Management</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div id="page-container">
+    <div>
+      <h1>Inventory Management</h1>
+      <!-- Flash messages display -->
+      <% if (messages) { %>
+        <% Object.keys(messages).forEach(function(key) { %>
+          <ul class="messages">
+            <% messages[key].forEach(function(message) { %>
+              <li class="<%= key %>"><%= message %></li>
+            <% }); %>
+          </ul>
+        <% }); %>
+      <% } %>
+      <!-- Links using MVC approach -->
+      <ul>
+        <li><a href="/inv/add-classification">Add New Classification</a></li>
+        <li><a href="/inv/add-inventory">Add New Inventory</a></li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
