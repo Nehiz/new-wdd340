@@ -23,9 +23,13 @@ router.post(
   "/login",
   regValidate.loginRules(), // Add validation rules
   regValidate.checkLoginData, // Add validation check
-  (req, res) => {
-    res.status(200).send('login process')
-  }
+  utilities.handleErrors(accountController.accountLogin)
+)
+
+// New default account management route
+router.get(
+  "/",
+  utilities.handleErrors(accountController.accountManagement)
 )
 
 module.exports = router

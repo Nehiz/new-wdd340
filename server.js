@@ -11,13 +11,14 @@ const env = require("dotenv").config()
 const session = require("express-session")
 const pool = require('./database/')
 const bodyParser = require("body-parser") // Ensure this line is present
+const cookieParser = require("cookie-parser")  // <-- Added cookie-parser
+const utilities = require("./utilities/")  // <-- Ensure utilities is required
 const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
 const errorRoute = require("./routes/errorRoute")
 const accountRoute = require("./routes/accountRoute")
-const utilities = require("./utilities")
 
 /* ***********************
  * Middleware
@@ -43,6 +44,12 @@ app.use(function(req, res, next){
 // Body Parser Middleware
 app.use(bodyParser.json()) // Ensure this line is present
 app.use(bodyParser.urlencoded({ extended: true })) // Ensure this line is present
+
+// Cookie Parser Middleware
+app.use(cookieParser())
+
+// JWT Middleware
+app.use(utilities.checkJWTToken)  // <-- Add the JWT middleware here
 
 /* View Engine and Templates */
 app.set('view engine', 'ejs');
