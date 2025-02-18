@@ -23,17 +23,23 @@ invCont.buildByClassificationId = async function (req, res, next) {
  *  Build inventory item detail view
  * ************************** */
 invCont.buildByInvId = async function (req, res, next) {
-  const invId = req.params.invId
-  const data = await invModel.getInventoryById(invId)
-  const detail = await utilities.buildInventoryDetail(data)
-  let nav = await utilities.getNav()
-  const title = `${data.inv_make} ${data.inv_model}`
-  res.render("./inventory/detail", {
-    title,
-    nav,
-    detail,
-  })
-}
+  try {
+    const invId = req.params.invId;
+    const data = await invModel.getInventoryById(invId);
+    const detail = await utilities.buildInventoryDetail(data);
+    let nav = await utilities.getNav();
+    const title = `${data.inv_make} ${data.inv_model}`;
+    // Pass both data and detail so the view can reference "data"
+    res.render("./inventory/detail", {
+      title,
+      nav,
+      data,
+      detail  // Optional if needed elsewhere
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 /* ***************************
  *  Build Inventory Management View

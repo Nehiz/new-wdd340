@@ -1,4 +1,46 @@
-<h1><%= title %></h1>
-<%- detail %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head') %>
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div id="page-container">
+    <main>
+      <!-- Removed H1 title to let the image cover the top -->
+      <div class="detail-container">
+        <!-- Left: Image Section with CTA overlay -->
+        <div class="detail-image">
+            <div class="image-overlay">
+                <img src="<%= data.inv_image %>" alt="Image of <%= data.inv_make %> <%= data.inv_model %>" />
+            </div>    
+        </div>
+        <!-- Right: Information Section -->
+        <div class="detail-info">
+          <div class="detail-text">
+            <h2><%= data.inv_make %> <%= data.inv_model %></h2>
+            <p><strong>Year:</strong> <%= data.inv_year %></p>
+            <p><strong>Price:</strong> $<%= new Intl.NumberFormat('en-US').format(data.inv_price) %></p>
+            <p><strong>Mileage:</strong> <%= new Intl.NumberFormat('en-US').format(data.inv_miles) %> miles</p>
+            <p><strong>Color:</strong> <%= data.inv_color %></p>
+            <p><strong>Description:</strong><br><%= data.inv_description %></p>
+          </div>
+          <div class="detail-actions">
+            <button onclick="location.href='/purchase/<%= data.inv_id %>'">Start My Purchase</button>
+            <button onclick="location.href='/contact'">Contact</button>
+            <button onclick="location.href='/financing'">Apply for Financing</button>
+            <button onclick="location.href='/test-drive'">Schedule a Test Drive</button>
+          </div>
+          <div class="cta-container">
+            <button onclick="location.href='tel:1234567890'">Call Us: (123) 456-7890</button>
+            <button onclick="location.href='/visit-us'">Visit Us</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
 
 
