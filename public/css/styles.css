@@ -276,7 +276,6 @@ footer {
 #inv-display li img {
   max-width: 100%;
   height: auto;
-  object-fit: cover;
 }
 
 .namePrice {
@@ -826,4 +825,45 @@ input:required:valid {
 
 #inventoryDisplay th.delete-column::before {
   content: "Delete";
+}
+
+.edit-inventory-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 2rem;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px var(--shadow-color);
+}
+
+.edit-inventory-form label {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.edit-inventory-form input,
+.edit-inventory-form textarea,
+.edit-inventory-form select {
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.edit-inventory-form button {
+  padding: 0.75rem;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--primary-color);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-inventory-form button:hover {
+  background-color: var(--secondary-color);
 }
