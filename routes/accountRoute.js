@@ -26,9 +26,10 @@ router.post(
   utilities.handleErrors(accountController.accountLogin)
 )
 
-// New default account management route
+// Default account management route
 router.get(
   "/",
+  utilities.checkLogin, // Add the checkLogin middleware here
   utilities.handleErrors(accountController.accountManagement)
 )
 
