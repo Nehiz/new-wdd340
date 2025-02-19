@@ -46,7 +46,7 @@ app.use(bodyParser.json()) // Ensure this line is present
 app.use(bodyParser.urlencoded({ extended: true })) // Ensure this line is present
 
 // Cookie Parser Middleware
-app.use(cookieParser())
+app.use(cookieParser()) // <-- Add the cookie-parser middleware here
 
 // JWT Middleware
 app.use(utilities.checkJWTToken)  // <-- Add the JWT middleware here

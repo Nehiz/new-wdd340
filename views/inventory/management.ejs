@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- ...existing head markup... -->
   <%- include('../partials/head') %>
   <title>Inventory Management</title>
   <link rel="stylesheet" href="/css/styles.css">
@@ -25,7 +24,22 @@
         <li><a href="/inv/add-classification">Add New Classification</a></li>
         <li><a href="/inv/add-inventory">Add New Inventory</a></li>
       </ul>
+      <!-- New content for managing inventory -->
+      <h2>Manage Inventory</h2>
+      <p>Select a classification to view inventory items:</p>
+      <!-- Display the select list -->
+      <form id="classificationForm">
+        <%- classificationSelect %>
+      </form>
+      <!-- Empty table for inventory items -->
+      <table id="inventoryDisplay"></table>
+      <!-- NoScript message -->
+      <noscript>
+        <p>JavaScript must be enabled to use this page.</p>
+      </noscript>
     </div>
   </div>
+  <!-- Include the JavaScript file -->
+  <script src="../../js/inventory.js"></script>
 </body>
 </html>

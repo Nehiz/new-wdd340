@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head') %>
+  <title>Account Management</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div id="page-container">
+    <main>
+      <h1>Account Management</h1>
+      <% if (messages) { %>
+        <% Object.keys(messages).forEach(function(key) { %>
+          <ul class="messages">
+            <% messages[key].forEach(function(message) { %>
+              <li class="<%= key %>"><%= message %></li>
+            <% }); %>
+          </ul>
+        <% }); %>
+      <% } %>
+      <p>You're logged in.</p>
+    </main>
+  </div>
+</body>
+</html>

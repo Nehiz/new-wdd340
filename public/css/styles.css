@@ -344,28 +344,27 @@ footer {
   }
 }
 
-/* Remove duplicate mobile media query blocks and keep one unified block */
+
 @media (max-width: 768px) {
-  /* Stack container elements vertically */
   .detail-container {
     flex-direction: column;
     width: 100%;
     margin: 0;
+
   }
-  /* Make image and info full width */
   .detail-image,
   .detail-info {
     flex: 1 1 100%;
     width: 100%;
     margin: 0;
   }
-  /* Stack details within info vertically */
+
   .detail-info {
     flex-direction: column;
     gap: 15px;
     grid-template-rows: 20vh 1fr 1fr 10vh;
   }
-  /* Ensure each section in detail-info takes full width */
+
   .detail-text,
   .detail-actions,
   .cta-container,
@@ -373,11 +372,11 @@ footer {
     flex: 1 1 100%;
     margin-bottom: 10px;
   }
-  /* For action buttons, stack vertically */
+
   .detail-actions {
     flex-direction: column;
   }
-  /* Center the CTA container */
+
   .cta-container {
     display: flex;
     flex-direction: column;
@@ -676,8 +675,8 @@ input:required:valid {
   padding: 0.5rem;
   border: 2px solid var(--border-color);
   border-radius: 5px;
-  color: var(--text-color); /* Ensure text color has sufficient contrast */
-  background-color: #fff; /* Ensure background color has sufficient contrast */
+  color: var(--text-color); 
+  background-color: #fff; 
 }
 
 .login-form button {
@@ -785,4 +784,3 @@ input:required:valid {
   }
   
 }
-

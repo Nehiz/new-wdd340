@@ -47,15 +47,17 @@ invCont.buildByInvId = async function (req, res, next) {
 invCont.buildManagementView = async function (req, res, next) {
   try {
     let nav = await utilities.getNav();
+    const classificationSelect = await utilities.buildClassificationList(); // Create the select list
     res.render("./inventory/management", {
       title: "Inventory Management",
       nav,
+      classificationSelect, // Pass the select list to the view
       messages: req.flash() // Pass flash messages to the view
     });
   } catch (error) {
     next(error);
   }
-};
+}
 
 /* ***************************
  *  Build Add Classification View
@@ -73,7 +75,7 @@ invCont.buildAddClassificationView = async function (req, res, next) {
   } catch (error) {
     next(error);
   }
-};
+}
 
 /* ***************************
  *  Process Classification Form
@@ -82,10 +84,8 @@ invCont.addClassification = async function (req, res, next) {
   try {
     const { classification_name } = req.body;
     let nav = await utilities.getNav();
-    
     // Call model function to insert new classification
     const addResult = await invModel.addClassification(classification_name);
-    
     if (addResult) {
       req.flash("success", `Classification "${classification_name}" added successfully.`);
       // Refresh the navigation bar (assumed to incorporate new classification) and render management view
@@ -94,21 +94,21 @@ invCont.addClassification = async function (req, res, next) {
     } else {
       req.flash("error", "Error: Classification was not added.");
       res.status(500).render("./inventory/add-classification", {
-        title: "Add Classification", 
-        nav, 
+        title: "Add Classification",
+        nav,
         messages: req.flash(),
         errors: req.flash("error"),
-        classification_name
+        classification_name,
       });
     }
   } catch (error) {
     next(error);
   }
-};
+}
 
 /* ***************************
  *  Build Add Inventory View
- * *************************** */
+ * ************************** */
 invCont.buildAddInventoryView = async function (req, res, next) {
   try {
     let nav = await utilities.getNav();
@@ -132,11 +132,11 @@ invCont.buildAddInventoryView = async function (req, res, next) {
   } catch (error) {
     next(error);
   }
-};
+}
 
 /* ***************************
  *  Process Inventory Form Submission
- * *************************** */
+ * ************************** */
 invCont.addInventory = async function (req, res, next) {
   try {
     const { classification_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color } = req.body;
@@ -165,7 +165,19 @@ invCont.addInventory = async function (req, res, next) {
   } catch (error) {
     next(error);
   }
-};
+}
+
+/* ***************************
+ *  Get inventory items by classification ID (AJAX)
+ * ************************** */
+invCont.getInventoryJSON = async (req, res, next) => {
+  const classification_id = parseInt(req.params.classification_id)
+  const invData = await invModel.getInventoryByClassificationId(classification_id)
+  if (invData[0].inv_id) {
+    return res.json(invData)
+  } else {
+    next(new Error("No data returned"))
+  }
+}
 
 module.exports = invCont
-

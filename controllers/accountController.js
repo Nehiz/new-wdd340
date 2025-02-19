@@ -131,10 +131,11 @@ accountController.accountLogin = async function (req, res) {
  * *************************************** */
 accountController.accountManagement = async function (req, res, next) {
   let nav = await utilities.getNav()
-  res.render("account/account-management", {
+  res.render("account/management", {
     title: "Account Management",
     nav,
-    errors: null,
+    messages: req.flash(),
+    errors: null
   })
 }
 
