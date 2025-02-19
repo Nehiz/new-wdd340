@@ -27,7 +27,7 @@ function buildInventoryList(data) {
   let inventoryDisplay = document.getElementById("inventoryDisplay");
   // Set up the table labels
   let dataTable = '<thead>';
-  dataTable += '<tr><th>Vehicle Name</th><td>&nbsp;</td><td>&nbsp;</td></tr>';
+  dataTable += '<tr><th>Vehicle Name</th><th class="modify-column"></th><th class="delete-column"></th></tr>';
   dataTable += '</thead>';
   // Set up the table body
   dataTable += '<tbody>';
