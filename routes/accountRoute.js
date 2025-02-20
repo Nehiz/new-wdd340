@@ -33,4 +33,19 @@ router.get(
   utilities.handleErrors(accountController.accountManagement)
 )
 
+// Route to deliver account management view
+router.get("/manage", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagementView))
+
+// Route to deliver update account information view
+router.get("/update/:accountId", utilities.checkLogin, utilities.handleErrors(accountController.buildUpdateAccountView))
+
+// Route to handle logout process
+router.get("/logout", utilities.handleErrors(accountController.logout))
+
+// Route to process account update form submission
+router.post("/update", regValidate.updateAccountRules(), regValidate.checkUpdateData, utilities.handleErrors(accountController.updateAccount))
+
+// Route to process password change form submission
+router.post("/update-password", regValidate.passwordRules(), regValidate.checkPasswordData, utilities.handleErrors(accountController.changePassword))
+
 module.exports = router
