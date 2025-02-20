@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head') %>
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div id="page-container">
+    <main>
+      <h1><%= title %></h1>
+      <%- messages() %>
+      <% if (errors) { %>
+        <ul class="error-list">
+          <% errors.array().forEach(error => { %>
+            <li><%= error.msg %></li>
+          <% }) %>
+        </ul>
+      <% } %>
+      <p>Confirm Deletion - The delete is permanent.</p>
+      <form action="/inv/delete" method="post" class="delete-inventory-form">
+        <label for="inv_make">Make:</label>
+        <input type="text" id="inv_make" name="inv_make" readonly value="<%= inv_make %>">
+
+        <label for="inv_model">Model:</label>
+        <input type="text" id="inv_model" name="inv_model" readonly value="<%= inv_model %>">
+
+        <label for="inv_year">Year:</label>
+        <input type="number" id="inv_year" name="inv_year" readonly value="<%= inv_year %>">
+
+        <label for="inv_price">Price:</label>
+        <input type="number" id="inv_price" name="inv_price" readonly value="<%= inv_price %>">
+
+        <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%= locals.inv_id %>" <% } %>>
+
+        <button type="submit">Delete Vehicle</button>
+      </form>
+    </main>
+  </div>
+</body>
+</html>

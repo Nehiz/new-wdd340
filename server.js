@@ -12,6 +12,8 @@ const session = require("express-session")
 const pool = require('./database/')
 const bodyParser = require("body-parser") // Ensure this line is present
 const cookieParser = require("cookie-parser")  // <-- Added cookie-parser
+const flash = require("connect-flash") // Add this line
+const messages = require("express-messages") // Add this line
 const utilities = require("./utilities/")  // <-- Ensure utilities is required
 const app = express()
 const static = require("./routes/static")
@@ -35,9 +37,9 @@ app.use(session({
 }))
 
 // Express Messages Middleware
-app.use(require('connect-flash')())
+app.use(flash()) // Ensure this line is present
 app.use(function(req, res, next){
-  res.locals.messages = require('express-messages')(req, res)
+  res.locals.messages = messages(req, res) // Ensure this line is present
   next()
 })
 
@@ -65,13 +67,13 @@ app.use(static)
 app.get("/", utilities.handleErrors(baseController.buildHome))
 
 // Inventory routes
-app.use("/inv", utilities.handleErrors(inventoryRoute))
+app.use("/inv", inventoryRoute)
 
 // Account routes
-app.use("/account", utilities.handleErrors(accountRoute))
+app.use("/account", accountRoute)
 
 // Error route
-app.use("/error", utilities.handleErrors(errorRoute))
+app.use("/error", errorRoute)
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {

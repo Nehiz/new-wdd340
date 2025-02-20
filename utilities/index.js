@@ -1,12 +1,46 @@
-const invModel = require("../models/inventory-model")
-const jwt = require("jsonwebtoken")
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
+const pool = require('../database/')
+const { body, validationResult } = require('express-validator')
+const invModel = require('../models/inventory-model') // Add this line
 require("dotenv").config()
-const Util = {}
+
+const utilities = {}
 
 /* ************************
- * Constructs the nav HTML unordered list
- ************************** */
-Util.getNav = async function (req, res, next) {
+ * Middleware to check JWT token
+ * ************************ */
+utilities.checkJWTToken = (req, res, next) => {
+  if (req.cookies.jwt) {
+    jwt.verify(
+      req.cookies.jwt,
+      process.env.ACCESS_TOKEN_SECRET,
+      function (err, accountData) {
+        if (err) {
+          req.flash("Please log in")
+          res.clearCookie("jwt")
+          return res.redirect("/account/login")
+        }
+        res.locals.accountData = accountData
+        res.locals.loggedin = 1
+        next()
+      })
+  } else {
+    next()
+  }
+}
+
+/* ************************
+ * Handle errors
+ * ************************ */
+utilities.handleErrors = (fn) => (req, res, next) => {
+  Promise.resolve(fn(req, res, next)).catch(next)
+}
+
+/* ************************
+ * Get navigation bar
+ * ************************ */
+utilities.getNav = async function (req, res, next) {
   let data = await invModel.getClassifications()
   let list = "<ul>"
   list += '<li><a href="/" title="Home page">Home</a></li>'
@@ -26,10 +60,28 @@ Util.getNav = async function (req, res, next) {
   return list
 }
 
+/* ************************
+ * Build classification list
+ * ************************ */
+utilities.buildClassificationList = async function (classification_id = null) {
+  const data = await invModel.getClassifications();
+  let classificationList = '<select name="classification_id" id="classificationList" required>';
+  classificationList += "<option value=''>Choose a Classification</option>";
+  data.rows.forEach((row) => {
+    classificationList += '<option value="' + row.classification_id + '"';
+    if (classification_id != null && row.classification_id == classification_id) {
+      classificationList += " selected";
+    }
+    classificationList += ">" + row.classification_name + "</option>";
+  });
+  classificationList += "</select>";
+  return classificationList;
+};
+
 /* **************************************
  * Build the classification view HTML
  * ************************************ */
-Util.buildClassificationGrid = async function(data) {
+utilities.buildClassificationGrid = async function(data) {
   let grid
   if (data.length > 0) {
     grid = '<ul id="inv-display">'
@@ -62,7 +114,7 @@ Util.buildClassificationGrid = async function(data) {
 /* **************************************
  * Build the inventory detail view HTML
  * ************************************ */
-Util.buildInventoryDetail = async function(data) {
+utilities.buildInventoryDetail = async function(data) {
   let detail = `
     <div class="inventory-detail">
       <img src="${data.inv_image}" alt="Image of ${data.inv_make} ${data.inv_model} on CSE Motors" />
@@ -80,57 +132,9 @@ Util.buildInventoryDetail = async function(data) {
 }
 
 /* ****************************************
- * Middleware For Handling Errors
- * Wrap other function in this for 
- * General Error Handling
- **************************************** */
-Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
-
-/* ****************************************
- * Build a dynamic classification drop-down list
- **************************************** */
-Util.buildClassificationList = async function (classification_id = null) {
-  const data = await invModel.getClassifications();
-  let classificationList = '<select name="classification_id" id="classificationList" required>';
-  classificationList += "<option value=''>Choose a Classification</option>";
-  data.rows.forEach((row) => {
-    classificationList += '<option value="' + row.classification_id + '"';
-    if (classification_id != null && row.classification_id == classification_id) {
-      classificationList += " selected";
-    }
-    classificationList += ">" + row.classification_name + "</option>";
-  });
-  classificationList += "</select>";
-  return classificationList;
-};
-
-/* ****************************************
- * Middleware to check token validity
- **************************************** */
-Util.checkJWTToken = (req, res, next) => {
-  if (req.cookies.jwt) {
-    jwt.verify(
-      req.cookies.jwt,
-      process.env.ACCESS_TOKEN_SECRET,
-      function (err, accountData) {
-        if (err) {
-          req.flash("Please log in")
-          res.clearCookie("jwt")
-          return res.redirect("/account/login")
-        }
-        res.locals.accountData = accountData
-        res.locals.loggedin = 1
-        next()
-      })
-  } else {
-    next()
-  }
-}
-
-/* ****************************************
  *  Check Login
  * ************************************ */
-Util.checkLogin = (req, res, next) => {
+utilities.checkLogin = (req, res, next) => {
   if (res.locals.loggedin) {
     next()
   } else {
@@ -139,4 +143,4 @@ Util.checkLogin = (req, res, next) => {
   }
 }
 
-module.exports = Util
+module.exports = utilities

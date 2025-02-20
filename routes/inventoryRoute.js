@@ -34,6 +34,12 @@ router.get("/getInventory/:classification_id", utilities.handleErrors(invControl
 // Route to deliver edit-inventory view
 router.get("/edit/:invId", utilities.handleErrors(invController.buildEditInventoryView));
 
+// Route to deliver delete confirmation view
+router.get("/delete/:invId", utilities.handleErrors(invController.buildDeleteInventoryView));
+
+// Route to process delete-inventory form submission
+router.post("/delete", utilities.handleErrors(invController.deleteInventoryItem));
+
 // Route to process update-inventory form submission
 router.post("/update", utilities.handleErrors(invController.updateInventory));
 
