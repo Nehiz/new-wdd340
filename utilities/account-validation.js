@@ -22,10 +22,10 @@ regValidate.registrationRules = () => {
       .trim()
       .notEmpty().withMessage("Email is required.")
       .isEmail().withMessage("Invalid email format.")
-      .custom(async (email) => {
-        const account = await accountModel.getAccountByEmail(email);
-        if (account) {
-          throw new Error("Email already in use.");
+      .custom(async (email, { req }) => {
+        const emailExists = await accountModel.getAccountByEmail(email);
+        if (emailExists && emailExists.account_id !== req.body.account_id) {
+          throw new Error("Email already exists.");
         }
       }),
 

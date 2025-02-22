@@ -51,6 +51,9 @@ accountController.registerAccount = async function (req, res) {
       title: "Registration",
       nav,
       errors: null,
+      account_firstname,
+      account_lastname,
+      account_email
     })
     return
   }
@@ -98,27 +101,33 @@ accountController.accountLogin = async function (req, res) {
       title: "Login",
       nav,
       errors: null,
-      account_email,
+      account_email
     })
     return
   }
   try {
     if (await bcrypt.compare(account_password, accountData.account_password)) {
       delete accountData.account_password
-      const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+      const accessToken = jwt.sign({ 
+        account_id: accountData.account_id,
+        account_firstname: accountData.account_firstname,
+        account_type: accountData.account_type 
+      }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
       if(process.env.NODE_ENV === 'development') {
         res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
       } else {
         res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
       }
-      return res.redirect("/account/")
+      req.session.accountId = accountData.account_id
+      req.session.accountData = accountData
+      return res.redirect("/account/manage")
     } else {
       req.flash("notice", "Please check your credentials and try again.")
       res.status(400).render("account/login", {
         title: "Login",
         nav,
         errors: null,
-        account_email,
+        account_email
       })
     }
   } catch (error) {
@@ -131,9 +140,11 @@ accountController.accountLogin = async function (req, res) {
  * *************************************** */
 accountController.accountManagement = async function (req, res, next) {
   let nav = await utilities.getNav()
-  res.render("account/management", {
+  const accountData = await accountModel.getAccountById(req.session.accountId)
+  res.render("account/manage", {
     title: "Account Management",
     nav,
+    accountData,
     messages: req.flash(),
     errors: null
   })
@@ -200,7 +211,7 @@ accountController.changePassword = async function (req, res, next) {
     })
     return
   }
-
+  
   const updateResult = await accountModel.updatePassword(account_id, hashedPassword)
 
   if (updateResult) {
@@ -222,8 +233,9 @@ accountController.changePassword = async function (req, res, next) {
  ************************** */
 accountController.logout = async function (req, res, next) {
   req.flash("notice", "You have been logged out."); 
-  res.clearCookie("jwt");
+  res.clearCookie("jwt", { httpOnly: true, secure: process.env.NODE_ENV !== 'development' });
+
   res.redirect("/");
 };
 
-module.exports = accountController;
+module.exports = accountController

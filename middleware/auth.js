@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const auth = {}
 
 /* ************************
- * Middleware to check account type
+ * Middleware to check account type (Only Admin & Employees Allowed)
  * ************************ */
 auth.checkAccountType = (req, res, next) => {
   if (req.cookies.jwt) {
@@ -32,3 +32,4 @@ auth.checkAccountType = (req, res, next) => {
 }
 
 module.exports = auth
+

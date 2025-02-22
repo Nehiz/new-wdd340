@@ -10,11 +10,13 @@ const expressLayouts = require('express-ejs-layouts');
 const env = require("dotenv").config()
 const session = require("express-session")
 const pool = require('./database/')
-const bodyParser = require("body-parser") // Ensure this line is present
-const cookieParser = require("cookie-parser")  // <-- Added cookie-parser
-const flash = require("connect-flash") // Add this line
-const messages = require("express-messages") // Add this line
-const utilities = require("./utilities/")  // <-- Ensure utilities is required
+const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
+const flash = require("connect-flash")
+const messages = require("express-messages")
+const utilities = require("./utilities/")
+const favicon = require('serve-favicon')
+const path = require('path')
 const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
@@ -37,21 +39,24 @@ app.use(session({
 }))
 
 // Express Messages Middleware
-app.use(flash()) // Ensure this line is present
+app.use(flash())
 app.use(function(req, res, next){
-  res.locals.messages = messages(req, res) // Ensure this line is present
+  res.locals.messages = messages(req, res)
   next()
 })
 
 // Body Parser Middleware
-app.use(bodyParser.json()) // Ensure this line is present
-app.use(bodyParser.urlencoded({ extended: true })) // Ensure this line is present
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // Cookie Parser Middleware
-app.use(cookieParser()) // <-- Add the cookie-parser middleware here
+app.use(cookieParser())
 
 // JWT Middleware
-app.use(utilities.checkJWTToken)  // <-- Add the JWT middleware here
+app.use(utilities.checkJWTToken)
+
+// Favicon Middleware
+app.use(favicon(path.join(__dirname, 'public', 'images', 'site', 'favicon-32x32.png')))
 
 /* View Engine and Templates */
 app.set('view engine', 'ejs');

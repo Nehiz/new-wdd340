@@ -34,7 +34,7 @@ router.get(
 )
 
 // Route to deliver account management view
-router.get("/manage", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagementView))
+router.get("/manage", utilities.checkLogin, utilities.handleErrors(accountController.accountManagement))
 
 // Route to deliver update account information view
 router.get("/update/:accountId", utilities.checkLogin, utilities.handleErrors(accountController.buildUpdateAccountView))
