@@ -1,3 +1,7 @@
+# ⚠️ Archived - Moved to Monorepo
+
+This project is now part of the [BYU-Pathway Coursework](https://github.com/Nehiz/byu-pathway-coursework) monorepo.
+
 ## Getting Started
 
 This document is intended to get you started quickly in building a backend driven Node.js application complete with pages and content, backend logic and a PostgreSQL database for data storage.
